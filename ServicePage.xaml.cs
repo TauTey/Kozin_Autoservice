@@ -25,8 +25,64 @@ namespace Kozin_Autoservice
             InitializeComponent();
             var currentService = Козин_АвтосервисEntities.GetContext().Service.ToList();
             ServiceListView.ItemsSource = currentService;
+            ComboType.SelectedIndex = 0;
+            UbdateService();
         }
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UbdateService();
+        }
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UbdateService();
+        }
+        private void RButtonDown_Checked(object sender, RoutedEventArgs e)
+        {
+            UbdateService();
+        }
+        private void RButtonUp_Checked(object sender, RoutedEventArgs e)
+        {
+            UbdateService();
+        }
+        private void UbdateService()
+        {
+            var currentServices = Козин_АвтосервисEntities.GetContext().Service.ToList();
+            if (ComboType.SelectedIndex == 0)
+            {
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 0 && Convert.ToInt32(p.Description) <= 100)).ToList();
+            }
+            if (ComboType.SelectedIndex == 1)
+            {
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 0 && Convert.ToInt32(p.Description) < 5)).ToList();
+            }
+            if (ComboType.SelectedIndex == 2)
+            {
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 5 && Convert.ToInt32(p.Description) < 15)).ToList();
+            }
+            if (ComboType.SelectedIndex == 3)
+            {
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 15 && Convert.ToInt32(p.Description) < 30)).ToList();
+            }
+            if (ComboType.SelectedIndex == 4)
+            {
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 30 && Convert.ToInt32(p.Description) < 70)).ToList();
+            }
+            if (ComboType.SelectedIndex == 5)
+            {
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 70 && Convert.ToInt32(p.Description) < 100)).ToList();
+            }
+            currentServices = currentServices.Where(p => p.Title.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();  
+            ServiceListView.ItemsSource = currentServices.ToList();
 
+            if (RButtonDown.IsChecked.Value)
+            {
+                ServiceListView.ItemsSource = currentServices.OrderByDescending(p => p.Cost).ToList(); 
+            }
+            if (RButtonUp.IsChecked.Value)
+            {
+                ServiceListView.ItemsSource = currentServices.OrderBy(p => p.Cost).ToList();
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddEditPage());
