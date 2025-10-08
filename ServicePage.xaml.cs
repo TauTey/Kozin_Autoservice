@@ -83,11 +83,11 @@ namespace Kozin_Autoservice
 
             if (RButtonDown.IsChecked.Value)
             {
-                ServiceListView.ItemsSource = currentServices.OrderByDescending(p => p.Cost).ToList(); 
+                currentServices = currentServices.OrderByDescending(p => p.Cost).ToList(); 
             }
             if (RButtonUp.IsChecked.Value)
             {
-                ServiceListView.ItemsSource = currentServices.OrderBy(p => p.Cost).ToList();
+                currentServices = currentServices.OrderBy(p => p.Cost).ToList();
             }
             ServiceListView.ItemsSource = currentServices;
             TableList = currentServices;
