@@ -11,7 +11,7 @@ namespace Kozin_Autoservice
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Service
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +20,20 @@ namespace Kozin_Autoservice
             this.ClientService = new HashSet<ClientService>();
             this.ServicePhoto = new HashSet<ServicePhoto>();
         }
-    
+
         public int ID { get; set; }
         public string Title { get; set; }
         public string MainImagePath { get; set; }
         public string Duration { get; set; }
         public decimal Cost { get; set; }
-        public double Description { get; set; }
+        public Nullable<double> Description { get; set; }
+        public int DescriptionT
+        {
+            get
+            {
+                return (int)(Description * 100);
+            }
+        }
         public string Discount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -49,27 +49,27 @@ namespace Kozin_Autoservice
             var currentServices = Козин_АвтосервисEntities.GetContext().Service.ToList();
             if (ComboType.SelectedIndex == 0)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 0 && Convert.ToInt32(p.Description) <= 100)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DescriptionT) >= 0 && Convert.ToInt32(p.DescriptionT) <= 100)).ToList();
             }
             if (ComboType.SelectedIndex == 1)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 0 && Convert.ToInt32(p.Description) < 5)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DescriptionT) >= 0 && Convert.ToInt32(p.DescriptionT) < 5)).ToList();
             }
             if (ComboType.SelectedIndex == 2)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 5 && Convert.ToInt32(p.Description) < 15)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DescriptionT) >= 5 && Convert.ToInt32(p.DescriptionT) <= 15)).ToList();
             }
             if (ComboType.SelectedIndex == 3)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 15 && Convert.ToInt32(p.Description) < 30)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DescriptionT) >= 15 && Convert.ToInt32(p.DescriptionT) <= 30)).ToList();
             }
             if (ComboType.SelectedIndex == 4)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 30 && Convert.ToInt32(p.Description) < 70)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DescriptionT) >= 30 && Convert.ToInt32(p.DescriptionT) <= 70)).ToList();
             }
             if (ComboType.SelectedIndex == 5)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Description) >= 70 && Convert.ToInt32(p.Description) < 100)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.DescriptionT) >= 70 && Convert.ToInt32(p.DescriptionT) <= 100)).ToList();
             }
             currentServices = currentServices.Where(p => p.Title.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();  
             ServiceListView.ItemsSource = currentServices.ToList();
